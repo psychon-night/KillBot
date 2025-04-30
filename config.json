@@ -2,7 +2,11 @@
 	"timeout_seconds": 60,
 	"cooldown_seconds": 60,
 	"excluded_users": [
-		1063584978081951814
+		1063584978081951814,
+		523777312161005571,
+		688862931248873542,
+		705432002039513108,
+		776563244562382949
 	],
 	"death_messages": [
 		"%s shot %s in cold blood",

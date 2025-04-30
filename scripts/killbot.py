@@ -84,7 +84,7 @@ async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 			set_timeout(id, bot)
 			
 			try: 
-				await user.timeout(datetime.timedelta(seconds=CONFIG["timeout_seconds"]))
+				await user.timeout_for(datetime.timedelta(seconds=CONFIG["timeout_seconds"]))
 			except Exception as err:
 				dprint("Failed to kill user: " + str(err))
 				return
