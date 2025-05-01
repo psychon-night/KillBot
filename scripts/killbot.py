@@ -85,8 +85,17 @@ async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 			
 			try: 
 				await user.timeout_for(datetime.timedelta(seconds=CONFIG["timeout_seconds"]))
+			
 			except Exception as err:
 				dprint("Failed to kill user: " + str(err))
+
+				if "Missing Permissions" in str(err):
+					await ctx.respond("Cannot possibly kill user, they're above me in the permissions list")
+					dprint("Likely because this user is the server owner, or bot is misconfigured on the server itself")
+
+				else:
+					await ctx.respond("Failed to kill this user")
+
 				return
 
 			try:

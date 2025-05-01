@@ -1,28 +1,32 @@
 {
-	"timeout_seconds": 60,
-	"cooldown_seconds": 60,
-	"excluded_users": [
-		1063584978081951814,
-		523777312161005571,
-		688862931248873542,
-		705432002039513108,
-		776563244562382949
-	],
-	"death_messages": [
-		"%s shot %s in cold blood",
-		"%s ran %s over with their Ford F-150",
-		"%s stabbed %s 28 times",
-		"%s threw %s off a non-magical cliff",
-		"%s eviscerated %s",
-		"%s made %s go missing under mysterious circumstances",
-		"%s used duct tape on %s! It was super effective!",
-		"%s sent %s to the forest",
-		"%s buried %s",
-		"%s rose from the dead and bit %s",
-		"%s used chloroform on %s",
-		"%s put a fedora on %s's face",
-		"%s stuffed a sock in %s's mouth",
-		"%s DMed %s a sad raccoon and made them cry"
-	],
-	"generic_death_message": "%s was killed"
+    "timeout_seconds": 60,
+    "cooldown_seconds": 60,
+    "excluded_users": [
+        1063584978081951814,
+        523777312161005571,
+        688862931248873542,
+        705432002039513108,
+        776563244562382949
+    ],
+    "developers": [
+        1063584978081951814,
+        794638161371725835
+    ],
+    "death_messages": [
+        "%s shot %s in cold blood",
+        "%s ran %s over with their Ford F-150",
+        "%s stabbed %s 28 times",
+        "%s threw %s off a non-magical cliff",
+        "%s eviscerated %s",
+        "%s made %s go missing under mysterious circumstances",
+        "%s used duct tape on %s! It was super effective!",
+        "%s sent %s to the forest",
+        "%s buried %s",
+        "%s rose from the dead and bit %s",
+        "%s used chloroform on %s",
+        "%s put a fedora on %s's face",
+        "%s stuffed a sock in %s's mouth",
+        "%s DMed %s a sad raccoon and made them cry"
+    ],
+    "generic_death_message": "%s was killed"
 }
