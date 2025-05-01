@@ -27,6 +27,6 @@ del _rid__te
 del _rid__le
 
 # Developer stuff
-VERSION = "1.3"
+VERSION = "1.4.0"
 DEBUG  = True
 LOCKED = False
