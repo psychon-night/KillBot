@@ -26,6 +26,10 @@ async def on_ready():
 		print(RED + "Commands are currently locked to developers" + RESET)
 
 # Register commands #
+@bot.command(name='run_id', description="Gets the current RUN_ID", pass_context=True)
+async def _getrunid(ctx):
+	await ctx.respond(str(RUN_ID), ephemeral=True)
+
 @bot.command(name='kill', description="Kill a user, but gently", pass_context=True)
 async def _kill(ctx, target:discord.Option(discord.Member, description="User to target")): # type:ignore
 	if (LOCKED) and (ctx.user.id != 1063584978081951814): return

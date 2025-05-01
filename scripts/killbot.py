@@ -55,7 +55,7 @@ async def ec_end_{id}():
 async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 	await ctx.defer()
 
-	origin = bot.get_user(ctx.author.id)
+	origin = await bot.fetch_user(ctx.author.id)
 	name   = user.display_name
 	id     = user.id
 

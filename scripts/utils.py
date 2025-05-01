@@ -11,14 +11,14 @@ def dprint(string:str):
 			open(f"{PATH}/logs/{RUN_ID}.log", "x").close()
 
 		with open(f"{PATH}/logs/{RUN_ID}.log", "a") as logfile:
-			logfile.write(dstrip(string))
+			logfile.write(dstrip(string + "\n"))
 
 def dlog(string:str):
 	if not os.path.exists(f"{PATH}/logs/{RUN_ID}.log"):
 		open(f"{PATH}/logs/{RUN_ID}.log", "x").close()
 
 		with open(f"{PATH}/logs/{RUN_ID}.log", "a") as logfile:
-			logfile.write(dstrip(string))
+			logfile.write(dstrip(string + "\n"))
 
 def panic_config_dump(config:str):
 	with open(f"{PATH}/crash_{RUN_ID}", "x") as logfile:
