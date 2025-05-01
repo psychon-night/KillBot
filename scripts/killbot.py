@@ -62,22 +62,29 @@ async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 	dprint(f"Got request to kill {name}, uid {id}")
 
 	timed_out, excluded = check_user(id)
+	is_suicide = id == ctx.author.id
 
-	dprint(f"{name} timed out: {MAGENTA}{timed_out}")
-	dprint(f"{name} excluded:  {MAGENTA}{excluded}")
+	dprint(f"{name} timed out:  {MAGENTA}{timed_out}")
+	dprint(f"{name} excluded:   {MAGENTA}{excluded}")
+	dprint(f"{name} is suicide: {MAGENTA}{is_suicide}")
 
-	match [timed_out, excluded]:
-		case [True, _]:
+	match [timed_out, excluded, is_suicide]:
+		case [_, _, True]:
+			dprint(f"{RED}{name} is trying to suicide. Will not kill")
+
+			await ctx.respond("Cannot commit suicide")
+
+		case [True, _, False]:
 			dprint(f"{RED}{name} is timed out. Will not kill")
 
 			await ctx.respond(f"{name} is already dead or on cooldown!")
 
-		case [_, True]:
+		case [_, True, False]:
 			dprint(f"{RED}{name} is excluded. Will not kill")
 
 			await ctx.respond(f"{name} cannot be killed")
 
-		case [False, False]:
+		case [False, False, False]:
 			dprint(f"{SPECIALDRIVE}{name} will be killed")
 
 			open(f"{PATH}/.cache/{id}", "x").close() # Create the cache file
