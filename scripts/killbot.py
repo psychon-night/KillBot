@@ -2,7 +2,7 @@ import datetime
 import random
 import discord
 
-from discord.ext import tasks
+from discord.ext import tasks # This is not unused, do not remove!
 
 from resources.shared import *
 from scripts.utils    import *
@@ -55,8 +55,9 @@ async def ec_end_{id}():
 async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 	await ctx.defer()
 
-	name = user.display_name
-	id   = user.id
+	origin = bot.get_user(ctx.author.id)
+	name   = user.display_name
+	id     = user.id
 
 	dprint(f"Got request to kill {name}, uid {id}")
 
@@ -102,7 +103,7 @@ async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 				kill_message = CONFIG["death_messages"][random.randint(0, NUM_RESPONSES-1)]
 
 				# await ctx.respond(f"debug: {name} ({id}) to be killed")
-				await ctx.respond(kill_message%(ctx.user.name, name))
+				await ctx.respond(kill_message%(origin.display_name, name))
 
 			except Exception as err:
 				dprint("Failed to send fun death message! " + str(err))
