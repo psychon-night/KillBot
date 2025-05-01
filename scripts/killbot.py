@@ -28,31 +28,28 @@ def set_timeout(id, bot:discord.Bot):
 	dprint(f"CT: {current_time}, ET: {end_timeout}. EC: {end_cooldown}")
 
 	# Set events
-	funcs = f"""@tasks.loop(seconds=CONFIG["timeout_seconds"], count=1)
-async def end_timeout_{id}():
-	NotImplemented
-
-@end_timeout_{id}.after_loop
-async def et_end_{id}():
-	dprint(f"Timeout ended for {id}")
-
-@tasks.loop(seconds=TOTAL_COOLDOWN_TIME_SECONDS, count=1)
+	funcs = f"""@tasks.loop(seconds=TOTAL_COOLDOWN_TIME_SECONDS, count=1)
 async def end_cooldown_{id}():
-	NotImplemented
+	dprint(f"Cooldown for {id} set to {TOTAL_COOLDOWN_TIME_SECONDS}")
 
-@end_timeout_{id}.after_loop
+@end_cooldown_{id}.after_loop
 async def ec_end_{id}():
 	dprint(f"Ending cooldown for {id}")
 	os.remove(f"{PATH}/.cache/{id}")
 """
 
 	exec(compile(funcs, f"funcs_{id}", "exec"))
-	exec(compile(f"end_timeout_{id}.start()", f"et_start_{id}", "exec"))
 	exec(compile(f"end_cooldown_{id}.start()", f"ec_start_{id}", "exec"))
 
 	return end_timeout
 
 async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
+	if not (ctx.channel.id in CONFIG["allowed_channels"]): 
+		dprint("Not in allowed channel, refusing request")
+		await ctx.respond("Command disabled in this channel", ephemeral=True)
+
+		return
+
 	await ctx.defer()
 
 	origin = await bot.fetch_user(ctx.author.id)

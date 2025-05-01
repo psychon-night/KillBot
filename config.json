@@ -1,6 +1,9 @@
 {
     "timeout_seconds": 60,
-    "cooldown_seconds": 60,
+    "cooldown_seconds": 300,
+	 "allowed_channels": [
+		1367596848390602912
+	 ],
     "excluded_users": [
         1063584978081951814,
         523777312161005571,
