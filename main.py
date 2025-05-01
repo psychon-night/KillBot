@@ -19,8 +19,7 @@ nest_asyncio.apply(loop)
 
 @bot.event
 async def on_ready():
-	print(MAGENTA + f"{VERSION}\nConnected to Discord")
-	dprint(RED + "Debug mode is enabled" + RESET)
+	print(MAGENTA + f"Connected to Discord")
 
 	if LOCKED: 
 		print(RED + "Commands are currently locked to developers" + RESET)
@@ -88,6 +87,13 @@ try:
 
 	if not os.path.isdir(f"{PATH}/logs"):
 		os.mkdir(f"{PATH}/logs")
+
+	print(MAGENTA + f"KillBot {VERSION}" + RESET)
+	dprint(RED + "Debug mode is enabled" + RESET)
+	
+	dprint(f"Loaded {len(CONFIG["developers"])} developers: {CONFIG["developers"]}")
+	dprint(f"Loaded exclusion list: {CONFIG["excluded_users"]}")
+	dprint(f"Loaded {len(CONFIG["death_messages"])} responses")
 
 	bot.run(TOKEN)
 

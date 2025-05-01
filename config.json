@@ -12,7 +12,8 @@
         1063584978081951814,
         794638161371725835
     ],
-    "death_messages": [
+    "generic_death_message": "%s went missing",
+	 "death_messages": [
         "%s shot %s in cold blood",
         "%s ran %s over with their Ford F-150",
         "%s stabbed %s 28 times",
@@ -67,5 +68,10 @@
 		  "%s insulted %s's Minecraft build",
 		  "%s kidnapped %s"
     ],
-    "generic_death_message": "%s went missing"
+	 "en_gb": {
+		"target_is_self": "Cannot commit suicide",
+		"target_higher_perms": "Cannot possibly kill %s (server owner / insufficient permissions)",
+		"target_opted_out": "%s cannot be killed (has opted out)",
+		"target_on_cooldown": "%s is already dead (or on cooldown)"
+	 }
 }

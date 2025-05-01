@@ -72,17 +72,17 @@ async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 		case [_, _, True]:
 			dprint(f"{RED}{name} is trying to suicide. Will not kill")
 
-			await ctx.respond("Cannot commit suicide")
+			await ctx.respond(CONFIG["en_gb"]["target_is_self"])
 
 		case [True, _, False]:
 			dprint(f"{RED}{name} is timed out. Will not kill")
 
-			await ctx.respond(f"{name} is already dead or on cooldown!")
+			await ctx.respond(CONFIG["en_gb"]["target_on_cooldown"]%name)
 
 		case [_, True, False]:
 			dprint(f"{RED}{name} is excluded. Will not kill")
 
-			await ctx.respond(f"{name} cannot be killed")
+			await ctx.respond(CONFIG["en_gb"]["target_opted_out"]%name)
 
 		case [False, False, False]:
 			dprint(f"{SPECIALDRIVE}{name} will be killed")
@@ -98,7 +98,7 @@ async def kill_user(ctx, user:discord.Member, bot:discord.Bot):
 				dprint("Failed to kill user: " + str(err))
 
 				if "Missing Permissions" in str(err):
-					await ctx.respond("Cannot possibly kill user, they're above me in the permissions list")
+					await ctx.respond(CONFIG["en_gb"]["target_higher_perms"]%name)
 					dprint("Likely because this user is the server owner, or bot is misconfigured on the server itself")
 
 				else:
