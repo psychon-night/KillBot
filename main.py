@@ -90,10 +90,15 @@ try:
 
 	print(MAGENTA + f"KillBot {VERSION}" + RESET)
 	dprint(RED + "Debug mode is enabled" + RESET)
+
+	ldv = len(CONFIG["developers"])
+	dv = CONFIG["developers"]
+	ex = CONFIG["excluded_users"]
+	lex = len(CONFIG["death_messages"])
 	
-	dprint(f"Loaded {len(CONFIG["developers"])} developers: {CONFIG["developers"]}")
-	dprint(f"Loaded exclusion list: {CONFIG["excluded_users"]}")
-	dprint(f"Loaded {len(CONFIG["death_messages"])} responses")
+	dprint(f"Loaded {ldv} developers: {dv}")
+	dprint(f"Loaded exclusion list: {ex}")
+	dprint(f"Loaded {lex} responses")
 
 	bot.run(TOKEN)
 
