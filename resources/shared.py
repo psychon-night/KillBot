@@ -21,12 +21,19 @@ for i in range(0,64):
 for char in _rid__le:
 	_rid__te = _rid__te + str(char)
 
+_rint_1 = ""
+_rint_2 = []
+
+for i in range(0,5): _rint_2.append(random.randint(0,9))
+for i in    _rint_2: _rint_1 = _rint_1 + str(i)
+
 RUN_ID = _rid__te
+KILLCD = _rint_2
 
 del _rid__te
 del _rid__le
 
 # Developer stuff
-VERSION = "1.4.0"
+VERSION = "1.4.3"
 DEBUG  = True
-LOCKED = False
+LOCKED = True

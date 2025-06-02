@@ -1,5 +1,9 @@
 from resources.shared import *
 from resources.colour import *
+import time
+
+def current_milli_time():
+    return round(time.time() * 1000)
 
 def dprint(string:str):
 	""" Prints in debug mode, does nothing otherwise """

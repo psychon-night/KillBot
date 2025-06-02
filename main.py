@@ -1,6 +1,7 @@
 import asyncio
 import nest_asyncio
 import copy
+import datetime
 
 import discord
 
@@ -10,18 +11,38 @@ from scripts.killbot import *
 from resources.shared import *
 from resources.colour import *
 
-# Vars # 
-bot = discord.Bot()
+# Vars #
+bot = discord.Bot(intents=discord.Intents(guilds=True, messages=True, message_content=True, voice_states=True, reactions=True, members=True, presences=True, moderation=True))
 
 # Patch event loop #
 loop = asyncio.get_event_loop()
 nest_asyncio.apply(loop)
 
+debounce = 0
+
+@bot.event
+async def on_member_update(before_update, after_update):
+	global debounce
+	print(f"Member updated: {after_update}. Timed out: {after_update.timed_out}")
+
+	if str(after_update.id) == "776563244562382949":
+		if bool(after_update.timed_out) and (debounce + 5000) < current_milli_time():
+			debounce = current_milli_time()
+			print("Removing timeout for 776563244562382949")
+
+			await after_update.timeout_for(datetime.timedelta(seconds=1), reason="Don't be a dick")
+
+@bot.event
+async def on_message(ctx):
+	if ctx.author.id in CONFIG["developers"] and ctx.content == f"!keycode {KILLCD}":
+		dprint(f"{ctx.author.id} requested immediate shutdown, terminating connection")
+		await bot.close()
+
 @bot.event
 async def on_ready():
 	print(MAGENTA + f"Connected to Discord")
 
-	if LOCKED: 
+	if LOCKED:
 		print(RED + "Commands are currently locked to developers" + RESET)
 
 # Register commands #
@@ -44,7 +65,7 @@ async def _set_timeout(ctx, mode:discord.Option(str, choices=["Timeout", "Cooldo
 
 	CONFIG_SNAPSHOT = copy.deepcopy(CONFIG)
 	dumped = False
-	
+
 	if mode == "Timeout":
 		CONFIG["timeout_seconds"] = time_secs
 		response = f"Timeout length set to {time_secs} seconds"
@@ -95,10 +116,12 @@ try:
 	dv = CONFIG["developers"]
 	ex = CONFIG["excluded_users"]
 	lex = len(CONFIG["death_messages"])
-	
+
 	dprint(f"Loaded {ldv} developers: {dv}")
 	dprint(f"Loaded exclusion list: {ex}")
 	dprint(f"Loaded {lex} responses")
+
+	dprint(f"Killcode: {KILLCD}")
 
 	bot.run(TOKEN)
 
